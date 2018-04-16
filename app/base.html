@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>imageLabel</title>
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <!-- build:css styles/edit.css -->
+    <link rel="stylesheet" href="styles/edit.css">
+    <!-- endbuild -->
+</head>
+
+<body>
+    <button class="addpic">点击选择图片</button>
+   <input type="text" name='ddd'>
+  
+
+    <!-- build:js scripts/jquery.js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <!-- endbuild -->
+    <!-- build:js scripts/main.js -->
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+    <script>
+        $(function () {
+            var $selectBox = $('.right-select-box');
+            $('.addpic').click(function () {
+                var $imageLabel=window.c=imageLabel({
+                    img: 'http://imgshfs.test.upcdn.net/design/088/000/a92OhQJLAdckG7vxfEp1.jpg!l',
+                    editPop: true, //修改内容弹窗
+                    close: function (d) {
+                        return true;
+                    },
+                    clickArea: function () { //点击选区事件
+
+                    },
+                    edit:function($d){
+                        console.log($d)
+                    },
+                    startArea: function () { //开始绘制事件
+
+                    },
+                    confirm:function(d){
+                        console.log(d);
+                        return true;
+                    }
+                });
+            });
+          
+        })
+
+    </script>
+</body>
+
+</html>

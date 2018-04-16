@@ -100,7 +100,8 @@ gulp.task('serve', () => {
       notify: false,
       port: 9000,
       server: {
-        baseDir: ['.tmp', 'app'],
+        baseDir: ['app','.tmp'],
+        directory: true,
         routes: {
           '/bower_components': 'bower_components'
         }
@@ -135,13 +136,6 @@ gulp.task('serve:test', ['scripts'], () => {
     notify: false,
     port: 9000,
     ui: false,
-    proxy: {
-        target: "http://shfs.wjkj.com",
-        middleware: function (req, res, next) {
-            console.log(req.url);
-            next();
-        }
-    },
     server: {
       baseDir: 'test',
       routes: {

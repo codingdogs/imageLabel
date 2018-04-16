@@ -3,6 +3,18 @@ function imageLabel(c) {
         alert('请填写图片地址');
         return false;
     }
+    var $imageLabel = {
+        getData: function () {
+            var d = [];
+            $('.imageLabel-imgDrop').each(function () {
+                d.push(JSON.parse($(this).attr('data-json')));
+            })
+            return d;
+        },
+        clearArea:function(){
+            $('.imageLabel-imgDrop').remove();
+        }
+    };
     var config = {
         only: false, //选中是否只显示自己
         shade: true, //遮罩
@@ -12,6 +24,9 @@ function imageLabel(c) {
         },
         edit: function () {
 
+        },
+        confirm:function(){
+            return true;
         },
         startArea: function () {
 
@@ -363,18 +378,17 @@ function imageLabel(c) {
         j();
         $(window).resize(j);
         //关闭整个事件
-        function getData() {
-            var d = [];
-            $('.imageLabel-imgDrop').each(function () {
-                d.push(JSON.parse($(this).attr('data-json')));
-            })
-            return d;
-        }
-        $('.imageLabel-closes').click(function () {
-            if (config.close(getData())) { //
 
+        $('.imageLabel-closes').click(function () {
+            if (config.close($imageLabel.getData())) { //
+                $html.removeClass('imageLabel-box-active')
+            }
+        }).next().click(function(){
+            if (config.confirm($imageLabel.getData())) { //
+                $html.removeClass('imageLabel-box-active');
             }
         })
+      
     }
     $html.find('.imageLabel-img').one('load', function () {
         $(this).addClass('imageLabel-img-active');
@@ -385,4 +399,8 @@ function imageLabel(c) {
     setTimeout(function () {
         $html.addClass('imageLabel-box-active');
     }, 0)
+
+
+
+    return $imageLabel;
 }
