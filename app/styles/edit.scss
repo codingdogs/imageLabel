@@ -1,0 +1,240 @@
+
+.right-select-box {
+    color:#333;
+    * {
+        box-sizing: border-box;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .full {
+        width: 100%;
+        height: 100%;
+    }
+    .full-w {
+        width: 100%;
+    }
+    .full-h {
+        height: 100%;
+    }
+    .flex-box {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+    .flex1 {
+        flex: 1;
+        -webkit-box-flex: 1;
+        overflow: hidden;
+    }
+    .cover {
+        object-fit: cover;
+        width:100%;
+        height:100%;
+    }
+    .cover-body{
+        position: relative;
+        overflow: hidden;
+        -webkit-transform: rotateZ(0deg);
+        .cover{
+            position: absolute;
+        }
+    }
+    .ellipsis {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    $b:#959595;
+    $sub:#959595; //副标题色
+    position: fixed;
+    width:300px;
+    bottom:0;
+    top:10px;
+    z-index: 200;
+    right:0;
+    user-select: none;
+    box-shadow: -5px 50px 50px 3px rgba(0, 0, 0, 0.1);
+    border-left:1px solid $b;
+    transition: all 0.4s;
+    transform: translate(100%, 0);
+    .select-close {
+        position: absolute;
+        right: 100%;
+        top: 50%;
+        display: block;
+        padding: 5px 5px;
+        background: #fff;
+        border: 1px solid $b;
+        border-right: none;
+        cursor: pointer;
+        svg {
+            transform: rotate(-90deg);
+            transition: all 0.3s;
+        }
+    }
+    &.select-active {
+        transform: translate(0, 0);
+        visibility: visible;
+        .select-close {
+            svg {
+                transform: rotate(90deg);
+            }
+        }
+    }
+    .select-title {
+        position: relative;
+        z-index: 2;
+        border-bottom: 1px solid $sub;
+        .btns {
+            font-size: 14px;
+            margin-top: -3px;
+            color: $sub;
+            padding: 5px 20px;
+            border: 1px solid $sub;
+            border-radius: 5px 5px 0 0;
+            margin-left: -1px;
+            background-color: #fff;
+            cursor: pointer;
+            position: relative;
+            border-color: transparent;
+            opacity: 0.9;
+            transition: all 0.4s;
+            &.active {
+                border-color: $sub;
+                border-bottom-color: #fff;
+                z-index: 1;
+                opacity: 1;
+                top: 1px;
+            }
+        }
+    }
+    .select-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        z-index: 0;
+        .select-content-inner {
+            background-color: #fff;
+            position: relative;
+            z-index: 0;
+            overflow: hidden; // background-color: #f1f4f6;
+            .inner-lists {
+                width: 200%;
+                transition: margin 0.4s;
+                padding-top:10px;
+                .inner-list{
+                    overflow: hidden;
+                    overflow-y: auto;
+                }
+            }
+        }
+    }
+    .ajax-loading{
+        margin-top:20px;
+        margin-bottom:10px;
+        position: relative;
+        text-align: center;
+        font-size: 12px;
+        color: #959595;
+        &:after{
+            content:'';
+            display: block;
+            margin:0 auto;
+            width:20px;
+            height:20px;
+            border-radius: 50%;
+            border:2px solid #000;
+            border-right-color:transparent;
+            animation: ajaxLoading 0.8s infinite linear;
+        }
+        &.over{
+            &:after{
+                display: none;
+
+            }
+            &:before{
+                content: '已经全部加载完成~';
+            }
+        }
+        &.nothing{
+            &:after{
+                display: none;
+
+            }
+            &:before{
+                content: '没有搜索到相关的产品~';
+            }
+        }
+    }
+}
+@keyframes ajaxLoading {
+    form {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+}
+.products-lists{
+    .list{
+        padding:10px;
+        border-bottom:1px solid rgba(0,0,0,0.1);
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover{
+            background-color: rgba(0,0,0,0.1);
+        }
+    }
+    .cover-body{
+        width:60px;
+        height:60px;
+        border-radius: 4px;
+        min-width:60px;
+    }
+    .fonts{
+        margin-left:10px;
+        font-size: 14px;
+        .title{
+
+        }
+        p{
+            color: #959595;
+            font-size:12px;
+            margin-top: 2px;
+        }
+    }
+}
+.products-list-body{
+    padding-top:100px;
+    .form-body{
+        box-shadow: 0 8px 10px rgba(0,0,0,0.1);
+        position: absolute;
+        top:0;
+        width: 100%;
+        height:90px;
+        left:0;
+        z-index: 1;
+        background-color: #fff;
+        padding:10px;
+        input{
+            width:100%;
+            height:30px;
+            margin-bottom:10px;
+            padding:0 10px;
+        }
+        select{
+            height:30px;
+            margin-right:10px;
+        }
+        button[type=submit]{
+            padding:0 20px;
+            background-color: #4B5060;
+            color: #fff;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+    }
+}

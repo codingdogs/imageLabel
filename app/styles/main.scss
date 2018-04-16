@@ -1,0 +1,337 @@
+//便于循环编写css 目前没有找到更好的办法
+$colorImageLabel:( "primary":#4B5060, // 主题颜色
+"title":#363636, // 标题色
+"sub":#959595, //副标题色
+"content":#252525, //文字内容色
+"grey":#ccc, "white":#fff, //白色
+"black":#000, //黑色
+"bg":#252525, //背景颜色
+"bgLight":#363636, //稍浅背景颜色
+"greyBg":#fafafa, //浅色背景颜色
+"greyDark":#f2f2f2, "border":#f3f3f3, "borderLight":#f3f3f3, "success":#57c90c, "error":#ff4048);
+@function colorImageLabel($n) {
+    @return map-get($colorImageLabel, $n);
+}
+
+@mixin full() {
+    width: 100%;
+    height: 100%;
+}
+
+@mixin zero() {
+    left: 0;
+    top: 0;
+}
+
+@mixin middle() {
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin middle_j() {
+    justify-content: center;
+}
+
+@mixin middle_a() {
+    align-items: center;
+}
+
+.imageLabel-box {
+    font-size: 14px;
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    @include full;
+    @include zero;
+    background-color: #363636;
+    z-index: 100;
+    // transform: scale(0.8);
+    transition: all 0.4s;
+    &.imageLabel-box-active{
+        visibility: visible;
+        opacity: 1;
+        transform: scale(1);
+    }
+    * {
+        -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+        outline: none;
+        box-sizing: border-box;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    button {
+        -webkit-user-select: none;
+    }
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none !important;
+        margin: 0;
+    }
+    input[type=text],
+    input[type=number],
+    input[type=tel],
+    input[type=password],
+    button {
+        -webkit-appearance: none;
+    }
+    input::-webkit-search-cancel-button {
+        display: none;
+    }
+    user-select: none;
+    .imageLabel {
+        @include full;
+        display: flex;
+        flex-direction: column;
+        .imageLabel-box {
+            @include full;
+        }
+    }
+    .imageLabel-buttons{
+        padding:10px;
+        text-align: center;
+        div{
+            padding:5px 10px;
+            margin:0 10px;
+            background-color: colorImageLabel(primary);
+            &.imageLabel-closes{
+                background-color: colorImageLabel(sub );
+            }
+        }
+    }
+    .imageLabel-img-boxs {
+        @include full;
+        @include middle;
+        flex:1;
+        display: flex;
+        .imageLabel-img-body {
+            position: relative;
+            overflow: hidden;
+            @include full;
+            display: flex;
+            @include middle;
+        }
+    }
+    .imageLabel-drap-menu {
+        background-color: #fff;
+        width: 100px;
+        position: fixed;
+        z-index: 9999;
+        display: none;
+        box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.06), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -7px rgba(0, 0, 0, 0.2);
+        .btns{
+            padding:5px 10px;
+            text-align: center;
+            &:hover{
+                background-color: rgba(0,0,0,0.1);
+            }
+            &:active{
+                opacity: 0.9;
+            }
+        }
+    }
+}
+
+// .imageLabel-content{
+//     &:before{
+//        content:'';
+//        position: absolute;
+//        @include full;
+//        @include zero;
+//        background-color: rgba(0,0,0,0.3);
+//     }
+// }
+.imageLabel-img{
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s;
+    &.imageLabel-img-active{
+        visibility: visible;
+        opacity: 1;
+    }
+}
+.imageLabel-content {
+    cursor: crosshair;
+    @include full;
+    @include zero;
+    position: absolute;
+}
+
+.imageLabel-imgDrop {
+    cursor: move;
+    position: absolute;
+    min-width: 7px;
+    min-height: 7px;
+    background-color: rgba(0, 0, 0, .3);
+    border: 1px dashed colorImageLabel(sub);
+    z-index: 10;
+    em {
+        //遮罩
+        $w: 10000px;
+        display: none;
+        z-index: -1;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.2);
+        &:nth-of-type(1) {
+            bottom: 100%;
+            left: 50%;
+            width: $w;
+            margin-bottom: 1px;
+            height: $w;
+            margin-left: -$w/2;
+        }
+        &:nth-of-type(2) {
+            left: 100%;
+            margin-left: 1px;
+            top: -1px;
+            width: $w;
+            bottom: -1px;
+        }
+        &:nth-of-type(3) {
+            top: 100%;
+            left: 50%;
+            width: $w;
+            margin-top: 1px;
+            height: $w;
+            margin-left: -$w/2;
+        }
+        &:nth-of-type(4) {
+            right: 100%;
+            top: -1px;
+            width: $w;
+            margin-right: 1px;
+            bottom: -1px;
+        }
+    }
+    i {
+        $zhi: 9px;
+        width: $zhi;
+        height: $zhi; // background-color: rgba(255,255,255,0.6);
+        border-radius: 50%;
+        border: 1px solid #fff;
+        background-color: colorImageLabel(sub);
+        ;
+        position: absolute;
+        cursor: default !important;
+        $chazhi: -5px;
+        &:nth-of-type(1) {
+            left: $chazhi;
+            top: $chazhi;
+            cursor: nw-resize;
+        }
+        &:nth-of-type(2) {
+            right: $chazhi;
+            top: $chazhi;
+            cursor: ne-resize;
+        }
+        &:nth-of-type(3) {
+            right: $chazhi;
+            bottom: $chazhi;
+            cursor: se-resize;
+        }
+        &:nth-of-type(4) {
+            left: $chazhi;
+            bottom: $chazhi;
+            cursor: sw-resize;
+        }
+        &:nth-of-type(5) {
+            left: 50%;
+            top: $chazhi;
+            margin-left: $chazhi;
+            cursor: col-resize;
+        }
+        &:nth-of-type(6) {
+            right: $chazhi;
+            top: 50%;
+            margin-top: $chazhi;
+            cursor: ew-resize;
+        }
+        &:nth-of-type(7) {
+            left: 50%;
+            bottom: $chazhi;
+            margin-left: $chazhi;
+            cursor: col-resize;
+        }
+        &:nth-of-type(8) {
+            left: $chazhi;
+            top: 50%;
+            margin-top: $chazhi;
+            cursor: ew-resize;
+        }
+    }
+    &.imageLabel-drop-now {
+        display: block !important;
+        background-color: transparent !important;
+        em {
+            display: block;
+        } // box-shadow:rgba(0, 0, 0, 0.5) 0px 0px 0px 99999999999px;
+    }
+}
+
+.imageLabel-input {
+    @include full;
+    position: fixed;
+    display: flex;
+    @include middle;
+    @include zero;
+    user-select: none;
+    visibility: hidden;
+    transition: all 0.4s;
+    opacity: 0;
+    z-index: 999999;
+    .imageLabel-input-box {
+        transform: scale(0);
+        transition: all 0.4s;
+    }
+    &.imageLabel-active {
+        opacity: 1;
+        visibility: visible;
+        .imageLabel-input-box {
+            transform: scale(1);
+        }
+    }
+}
+
+.imageLabel-btn {
+    padding: 6px 10px;
+    background-color: #333;
+    color: #fff;
+    user-select: none;
+    border-radius: 3px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.06), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    &:active {
+        opacity: 0.8;
+    }
+}
+
+.imageLabel-loading-body {
+    @include full;
+    position: absolute;
+    @include zero;
+    display: flex;
+    @include middle;
+}
+
+.imageLabel-loading {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    border-right-color: rgba(255, 255, 255, 0.2);
+    animation: imageLabelLoading 1s infinite linear;
+}
+
+@keyframes imageLabelLoading {
+    form {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+}

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>imageLabel</title>
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <!-- build:css styles/edit.css -->
+    <link rel="stylesheet" href="styles/edit.css">
+    <!-- endbuild -->
+</head>
+
+<body>
+    <button class="addpic">点击选择图片</button>
+    <div class="right-select-box">
+        <div class="select-close">
+            <svg t="1523862783721" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3241"
+                xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20">
+                <defs>
+                    <style type="text/css"></style>
+                </defs>
+                <path d="M910.222222 796.444444c-17.066667 0-34.133333-5.688889-45.511111-17.066666L551.822222 409.6c-11.377778-5.688889-17.066667-11.377778-34.133333-11.377778-5.688889 0-22.755556 5.688889-28.444445 11.377778l-329.955555 364.088889c-22.755556 22.755556-56.888889 22.755556-79.644445 5.688889-22.755556-22.755556-22.755556-56.888889-5.688888-79.644445l329.955555-364.088889c28.444444-34.133333 73.955556-51.2 119.466667-51.2s85.333333 22.755556 119.466666 56.888889l312.888889 364.088889c22.755556 22.755556 17.066667 56.888889-5.688889 79.644445-11.377778 5.688889-28.444444 11.377778-39.822222 11.377777z"
+                    p-id="3242"></path>
+            </svg>
+        </div>
+        <div class="select-content">
+            <div class="select-title flex-box">
+                <div class="btns active">产品</div>
+                <!-- <div class="btns active">已选择</div> -->
+            </div>
+            <div class="select-content-inner flex1 full-w">
+                <ul class="inner-lists flex-box full-h">
+                    <li class="inner-list flex1 full-h products-list-body">
+                        <div class="form-body">
+                            <form id='select_form'>
+                                <input type="text" placeholder="名称" name='name'>
+                                <input type="hidden" name='count' value="10">
+                                <input type="hidden" name='currentpage' value="0">
+                                <div class="flex-box">
+                                    <select name="category_id" class="flex1">
+                                        <option value="">请选择类目</option>
+                                    </select>
+                                    <select name="brand_id" class="flex1">
+                                        <option value="">请选择产品</option>
+                                    </select>
+                                    <button type='submit'>搜索</button>
+                                </div>
+                            </form>
+                        </div>
+                        <ul class="products-lists">
+
+                        </ul>
+                        <div class="ajax-loading"></div>
+                    </li>
+                    <li class="inner-list flex1 full-h">
+                        <!-- 222 -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script id='module' type="text/html">
+        {{each list $v i}}
+        <li class="flex-box list">
+            <div class="cover-body">
+                <img src="{{$v.pic}}" class="cover" alt="">
+            </div>
+            <div class="flex1 fonts">
+                <div class='full-w'>
+                    <div class="title ellipsis" title='{{$v.name}}'>{{$v.name}}</div>
+                    <p class="ellipsis" title='{{$v.brand_name}}（{{$v.category_name}}'>{{$v.brand_name}}（{{$v.category_name}}）</p>
+                    <p class="ellipsis">￥{{$v.price}}</p>
+                </div>
+            </div>
+        </li>
+        {{/each}}
+    </script>
+    <script id='select_option' type="text/html">
+        {{each category_list $v i}}
+        <option value="{{$v.id}}">{{$v.name}}</option>
+        {{/each}}
+    </script>
+    <script id='select_option1' type="text/html">
+        {{each brand_list $v i}}
+        <option value="{{$v.id}}">{{$v.name}}</option>
+        {{/each}}
+    </script>
+
+    <!-- build:js scripts/jquery.js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <!-- endbuild -->
+    <!-- build:js scripts/main.js -->
+    <script src="scripts/main.js"></script>
+    <script src="/bower_components/art-template/lib/template-web.js"></script>
+    <!-- endbuild -->
+    <script>
+        $(function () {
+            var $selectBox = $('.right-select-box');
+            var $form = $('#select_form');
+            $('.addpic').click(function () {
+                imageLabel({
+                    img: 'http://imgshfs.test.upcdn.net/design/088/000/a92OhQJLAdckG7vxfEp1.jpg!l',
+                    editPop: false, //修改内容弹窗
+                    close: function (d) {
+                        console.log(d, 1212)
+                        return false;
+                    },
+                    clickArea: function () { //点击选区事件
+
+                    },
+                    edit:function($d){
+                        console.log($d)
+                        $('.right-select-box').addClass('select-active');
+                    },
+                    startArea: function () { //开始绘制事件
+
+                    }
+                });
+            });
+            $('.select-close').click(function () {
+                $selectBox.toggleClass('select-active')
+            })
+            $('.select-title .btns').click(function () {
+                var $t = $(this);
+                $t.addClass('active').siblings().removeClass('active');
+                $('.inner-lists').css({
+                    marginLeft: -100 * $t.index() + '%'
+                })
+            })
+            var $ajaxLoading = $('.ajax-loading');
+            var flag = true,
+                first = true,
+                $set;
+            $('.products-list-body').scroll(function () {
+                var $t = $(this);
+                var s = $t.scrollTop() + $t.height();
+                var t = $ajaxLoading.position().top;
+                if (s + 50 > t && flag) {
+                    flag = false;
+                    var p = Number($form.find('[name=currentpage]').val());
+                    $form.find('[name=currentpage]').val(p+1);
+                    $.ajax({
+                        url: 'http://shfs.wjkj.com/admin/api/pic/product/list',
+                        dataType: 'json',
+                        type: 'get',
+                        data:$form.serializeArray(),
+                        success: function (res) {
+                            if (res.code == 1000) {
+                                $('.products-lists').append(template('module', res.data));
+                                if ($set) {
+                                    clearTimeout($set);
+                                }
+                                $set = setTimeout(function () {
+                                    if (res.data.list.length < 10) {
+                                        if($('.products-lists .list').length==0){
+                                            $ajaxLoading.addClass('nothing');
+                                        }else{
+                                            $ajaxLoading.addClass('over');
+                                        }
+                                        flag = false;
+                                    } else {
+                                        flag = true;
+                                    }
+                                    $('.products-list-body').scroll();
+                                }, 10)
+                                if (first) {
+                                    $('#select_form [name=category_id]').append(template(
+                                        'select_option', res.data))
+                                    $('#select_form [name=brand_id]').append(template(
+                                        'select_option1', res.data))
+                                }
+                                first = false;
+                            }
+                        },
+                        error: function () {
+                            flag = true;
+                        }
+                    })
+                }
+            }).scroll();
+            $('#select_form').submit(function(e){
+                var $t = $(this);
+                e.preventDefault();
+                $form.find('[name=currentpage]').val(0);
+                $('.products-lists').html('');
+                flag = true;
+                $ajaxLoading.removeClass('nothing over');
+                $('.products-lists').scroll();
+                return false;
+            })
+        })
+
+    </script>
+</body>
+
+</html>
