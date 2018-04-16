@@ -4,7 +4,8 @@
     "node": ">=4"
   },
   "scripts": {
-    "start": "gulp serve"
+    "start": "gulp serve",
+    "build": "gulp build"
   },
   "devDependencies": {
     "babel-core": "^6.4.0",

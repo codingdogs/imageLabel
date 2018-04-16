@@ -168,6 +168,12 @@ $colorImageLabel:( "primary":#4B5060, // 主题颜色
     background-color: rgba(0, 0, 0, .3);
     border: 1px dashed colorImageLabel(sub);
     z-index: 10;
+    display: flex;
+    @include middle;
+    span{
+        color: #fff;
+
+    }
     em {
         //遮罩
         $w: 10000px;
@@ -263,7 +269,6 @@ $colorImageLabel:( "primary":#4B5060, // 主题颜色
         }
     }
     &.imageLabel-drop-now {
-        display: block !important;
         background-color: transparent !important;
         em {
             display: block;
