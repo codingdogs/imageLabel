@@ -160,21 +160,23 @@ $colorImageLabel:( "primary":#4B5060, // 主题颜色
     position: absolute;
 }
 
-.imageLabel-imgDrop {
+.imageLabel-imgdrop {
     cursor: move;
     position: absolute;
     min-width: 7px;
     min-height: 7px;
     background-color: rgba(0, 0, 0, .3);
     border: 1px dashed colorImageLabel(sub);
+
     z-index: 10;
     display: flex;
+
     @include middle;
     span{
         color: #fff;
 
     }
-    em {
+    em.imageLable-em {
         //遮罩
         $w: 10000px;
         display: none;
@@ -219,7 +221,7 @@ $colorImageLabel:( "primary":#4B5060, // 主题颜色
         border-radius: 50%;
         border: 1px solid #fff;
         background-color: colorImageLabel(sub);
-        ;
+
         position: absolute;
         cursor: default !important;
         $chazhi: -5px;
@@ -268,11 +270,46 @@ $colorImageLabel:( "primary":#4B5060, // 主题颜色
             cursor: ew-resize;
         }
     }
+
     &.imageLabel-drop-now {
+        .imageLabel-imgdrop-font{
+            opacity: 0;
+        }
+        display: block!important;
         background-color: transparent !important;
-        em {
+        em.imageLable-em {
             display: block;
         } // box-shadow:rgba(0, 0, 0, 0.5) 0px 0px 0px 99999999999px;
+    }
+    em.imageLable-em{
+        pointer-events: none;
+    }
+    &.imageLabel-drop-edit{
+        border:2px solid transparent;
+        border-image:url('../images/border.gif') 1 1 round;
+        @extend .imageLabel-drop-now;
+    }
+    &.imageLabel-drop-has{
+        .imageLabel-imgdrop-font{
+            opacity: 1;
+        }
+        background-color: rgba(255,0,0,0.3)!important;
+    }
+    &.imageLabel-drop-move{
+        .imageLabel-imgdrop-font{
+            opacity: 0;
+        }
+        background-color: transparent !important;
+    }
+    .imageLabel-imgdrop-font{
+        pointer-events: none;
+        overflow: hidden;
+        padding:2px;
+        position: absolute;
+        @include full;
+        @include zero;
+        display: flex;
+        @include middle;
     }
 }
 
