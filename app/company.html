@@ -38,7 +38,7 @@
                         <div class="form-body">
                             <form id='select_form'>
                                 <input type="text" placeholder="名称" name='name'>
-                                <input type="hidden" name='count' value="10">
+                                <input type="hidden" name='count' value="20">
                                 <input type="hidden" name='currentpage' value="0">
                                 <div class="flex-box">
                                     <select name="category_id" class="flex1">
@@ -65,7 +65,8 @@
     </div>
     <script id='module' type="text/html">
         {{each list $v i}}
-        <li class="flex-box list">
+        <li class="flex-box list" data-data='{{$v}}'>
+            <div class='jiao'></div>
             <div class="cover-body">
                 <img src="{{$v.pic}}" class="cover" alt="">
             </div>
@@ -97,32 +98,69 @@
     <script src="scripts/main.js"></script>
     <script src="/bower_components/art-template/lib/template-web.js"></script>
     <!-- endbuild -->
-     <!-- build:js scripts/template.js -->
-     <script src="/bower_components/art-template/lib/template-web.js"></script>
-     <!-- endbuild -->
+    <!-- build:js scripts/template.js -->
+    <script src="/bower_components/art-template/lib/template-web.js"></script>
+    <!-- endbuild -->
     <script>
         $(function () {
             var $selectBox = $('.right-select-box');
             var $form = $('#select_form');
+            var $imageLabel;
             $('.addpic').click(function () {
-                imageLabel({
+                window.c = $imageLabel = imageLabel({
                     img: 'http://imgshfs.test.upcdn.net/design/088/000/a92OhQJLAdckG7vxfEp1.jpg!l',
+                    only: false,
                     editPop: false, //修改内容弹窗
+                    d1ata: [{
+                        "x": 0.16173752310536044,
+                        "y": 0.27149916682465397,
+                        "ex": 0.400184842883549,
+                        "ey": 0.5359200850138197,
+                        "product_id": 821,
+                        "name":1
+                    }, {
+                        "x": 0.5101663585951941,
+                        "y": 0.18468928047575808,
+                        "ex": 0.6081330868761553,
+                        "ey": 0.3213899061056287,
+                        "product_id": 819,
+                        "name":2
+                    }, {
+                        "x": 0.511090573012939,
+                        "y": 0.4770490126622696,
+                        "ex": 0.5878003696857671,
+                        "ey": 0.6217321565770961,
+                        "product_id": 817,
+                        "name":3
+                    }],
                     close: function (d) {
-                        console.log(d, 1212)
-                        return false;
+                        // console.log(d, 1212)
+                        return confirm('确定关闭吗？操作的数据有可能丢失哦！');
                     },
                     clickArea: function () { //点击选区事件
 
                     },
-                    edit:function($d){
-                        console.log($d)
+                    edit: function ($d) {
+                        // console.log($d)
                         $('.right-select-box').addClass('select-active');
                     },
                     startArea: function () { //开始绘制事件
 
+                    },
+                    confirm:function(d){
+                        var flag = true;
+                        $.each(d,function(i,o){
+                            if(!o.product_id){
+                                flag = false;
+                            }
+                        })
+                        if(!flag){
+                            alert('选区有未绑定产品的，请检查灰色块！')
+                        }
+                        return flag;
                     }
                 });
+
             });
             $('.select-close').click(function () {
                 $selectBox.toggleClass('select-active')
@@ -138,35 +176,40 @@
             var flag = true,
                 first = true,
                 $set;
+            var total = 0;
             $('.products-list-body').scroll(function () {
                 var $t = $(this);
                 var s = $t.scrollTop() + $t.height();
-                var t = $ajaxLoading.position().top;
-                if (s + 50 > t && flag) {
+                var t = $('.products-lists').height();
+                // console.log(s+50,t)
+                if (s + 200 > t && flag) {
                     flag = false;
                     var p = Number($form.find('[name=currentpage]').val());
-                    $form.find('[name=currentpage]').val(p+1);
+                    $form.find('[name=currentpage]').val(p + 1);
                     $.ajax({
                         url: 'http://shfs.wjkj.com/admin/api/pic/product/list',
                         dataType: 'json',
                         type: 'get',
-                        data:$form.serializeArray(),
+                        data: $form.serializeArray(),
                         success: function (res) {
                             if (res.code == 1000) {
                                 $('.products-lists').append(template('module', res.data));
                                 if ($set) {
                                     clearTimeout($set);
                                 }
+                                total += res.data.list.length;
+
                                 $set = setTimeout(function () {
-                                    if (res.data.list.length < 10) {
-                                        if($('.products-lists .list').length==0){
-                                            $ajaxLoading.addClass('nothing');
-                                        }else{
-                                            $ajaxLoading.addClass('over');
-                                        }
+                                    if (res.data.params.total == 0) {
+                                        $ajaxLoading.addClass('nothing');
                                         flag = false;
                                     } else {
-                                        flag = true;
+                                        if (res.data.params.total > total) {
+                                            flag = true;
+                                        } else {
+                                            flag = false;
+                                            $ajaxLoading.addClass('over');
+                                        }
                                     }
                                     $('.products-list-body').scroll();
                                 }, 10)
@@ -184,17 +227,47 @@
                         }
                     })
                 }
-            }).scroll();
-            $('#select_form').submit(function(e){
+            }).scroll().on('click', '.list', function () {
+                var $t = $(this);
+                var d = JSON.parse($t.attr('data-data'));
+                var $edit = $('.imageLabel-drop-edit');
+                if ($edit.length) {
+                    var j = JSON.parse($edit.attr('data-json'));
+                    j.product_id = d.id;
+                    j.name = d.name;
+                    $edit.attr('data-json', JSON.stringify(j));
+                    $edit.find('span').html(d.name);
+                    $edit.addClass('imageLabel-drop-has');
+                    $t.addClass('active');
+                }
+            });
+            $('#select_form').submit(function (e) {
                 var $t = $(this);
                 e.preventDefault();
                 $form.find('[name=currentpage]').val(0);
                 $('.products-lists').html('');
                 flag = true;
+                total = 0;
                 $ajaxLoading.removeClass('nothing over');
                 $('.products-lists').scroll();
                 return false;
-            })
+            });
+            setInterval(function () {
+                var $drop = $('.imageLabel-drop-has');
+                var $lists = $('.products-lists .list').removeClass('active');
+                if ($drop.length > 0) {
+                    $lists.each(function (i, o) {
+                        var $t = $(this);
+                        var d = JSON.parse($t.attr('data-data'));
+                        $drop.each(function (i1, o1) {
+                            var d1 = JSON.parse($(o1).attr('data-json'));
+                            if (d1.product_id == d.id) {
+                                $t.addClass('active');
+                            }
+                        });
+                    });
+                }
+            }, 1000)
         })
 
     </script>
