@@ -428,7 +428,10 @@ function imageLabel(c) {
 
         $('.imageLabel-closes').click(function () {
             if (config.close($imageLabel.getData())) { //
-                $html.removeClass('imageLabel-box-active')
+                $html.removeClass('imageLabel-box-active');
+                setTimeout(function(){
+                    $html.remove();
+                },500)
             }
         }).next().click(function(){
             if (config.confirm($imageLabel.getData())) { //
