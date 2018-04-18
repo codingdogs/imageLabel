@@ -54,9 +54,9 @@ $imageLabel.close()//关闭
 | name 名称      | type 类型 | default 默认值 | describe 描述                          |
 | ------------ | :-----: | :---------: | ---------------------------------------- |
 | img        | String  |             | 必填值，图片路径                                     |
-| data     | Array  |     []      | 区域数据，打开自动渲染 |
+| data     | Array  |     []      | 区域数据，默认渲染 |
 | editPop     | Boolean  |     true      | 是否启用默认修改弹窗 |
-| only     | Boolean  |     false      | 选中区域是否隐藏其他区域 |
+| only     | Boolean  |     false      | 选中单个区域是否隐藏其他区域，更加洁净 |
 | shade     | Boolean  |     true      | 是否显示遮罩 |
-| close     | Function  |           | 关闭按钮事件 return false 阻止默认关闭 |
-| confirm     | Function  |           | 确定按钮事件 return false 阻止默认关闭 |
+| close     |Function  |           | 关闭按钮事件 return false 阻止默认关闭 |
+| confirm     |Function  |           | 确定按钮事件 return false 阻止默认关闭 |
