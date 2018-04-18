@@ -1,5 +1,4 @@
 {
-  "private": false,
   "engines": {
     "node": ">=4"
   },
