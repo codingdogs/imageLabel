@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "image label tool",
     "main": "gulpfile.js",
+    "private":false,
     "directories": {
         "test": "test"
     },
