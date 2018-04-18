@@ -2,19 +2,19 @@
 
 >基于jquery的图片标注插件（之后会有其他版本，请关注）
 
-### example (图片展示)
+## example (图片展示)
 ![pic](https://codingdogs.github.io/imageLabel/dist/images/pic.gif)
 
-### [demo](https://codingdogs.github.io/imageLabel/dist/)
+## [demo](https://codingdogs.github.io/imageLabel/dist/)
 
-### start
+## start
 >引入jquery，以及插件的css，js
 ```html
 <link rel="stylesheet" type="text/css" href="jquery.imageLabel.min.css">
 <script src="jquery.min.js"></script>
 <script src="jquery.imageLabel.min.js"></script>
 ```
-### use
+## use
 ```javascript
 var $imageLabel = imageLabel({
     img: 'https://i1.mifile.cn/f/i/18/mitv4A/40/build.jpg', //要修改的图片地址
@@ -49,7 +49,7 @@ $imageLabel.clearArea()//清除选区
 $imageLabel.close()//关闭
 ```
 
-### props
+## props
 
 | name 名称      | type 类型 | default 默认值 | describe 描述                          |
 | ------------ | :-----: | :---------: | ---------------------------------------- |
