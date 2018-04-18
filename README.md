@@ -5,7 +5,7 @@
 ### example (图片展示)
 ![pic](https://codingdogs.github.io/imageLabel/dist/images/pic.gif)
 
-### [demo](https://codingdogs.github.io/imageLabel/dist/index.html)
+### [demo](https://codingdogs.github.io/imageLabel/dist/)
 
 ### start
 >引入jquery，以及插件的css，js
