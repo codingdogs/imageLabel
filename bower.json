@@ -1,7 +1,25 @@
 {
   "name": "imagelabel",
+  "version":0.10,
   "dependencies": {
     "jquery": "^3.3.1",
     "art-template": "^4.12.1"
-  }
+  },
+  "homepage": "https://github.com/codingdogs/imageLabel",
+  "authors": [
+    "704175885@qq.com"
+  ],
+  "description": "image label tool",
+  "main": "jquery.imageLabel.min.js",
+  "keywords": [
+    "imageLabel"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }
