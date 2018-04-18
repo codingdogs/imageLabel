@@ -15,54 +15,57 @@
 </head>
 
 <body>
-    <button class="addpic">点击选择图片</button>
-    <div class="right-select-box">
-        <div class="select-close">
-            <svg t="1523862783721" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3241"
-                xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20">
-                <defs>
-                    <style type="text/css"></style>
-                </defs>
-                <path d="M910.222222 796.444444c-17.066667 0-34.133333-5.688889-45.511111-17.066666L551.822222 409.6c-11.377778-5.688889-17.066667-11.377778-34.133333-11.377778-5.688889 0-22.755556 5.688889-28.444445 11.377778l-329.955555 364.088889c-22.755556 22.755556-56.888889 22.755556-79.644445 5.688889-22.755556-22.755556-22.755556-56.888889-5.688888-79.644445l329.955555-364.088889c28.444444-34.133333 73.955556-51.2 119.466667-51.2s85.333333 22.755556 119.466666 56.888889l312.888889 364.088889c22.755556 22.755556 17.066667 56.888889-5.688889 79.644445-11.377778 5.688889-28.444444 11.377778-39.822222 11.377777z"
-                    p-id="3242"></path>
-            </svg>
-        </div>
-        <div class="select-content">
-            <div class="select-title flex-box">
-                <div class="btns active">产品</div>
-                <!-- <div class="btns active">已选择</div> -->
+    <button class="addpic" data-id='778' data-src='http://imgshfs.test.upcdn.net/design/110/000/xubXJa9o6RiNQGCOuRYP.jpg!l'>点击选择图片</button>
+    <div class="right-content" style="display: none;">
+        <div class="right-select-box">
+            <div class="select-close">
+                <svg t="1523862783721" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3241"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20">
+                    <defs>
+                        <style type="text/css"></style>
+                    </defs>
+                    <path d="M910.222222 796.444444c-17.066667 0-34.133333-5.688889-45.511111-17.066666L551.822222 409.6c-11.377778-5.688889-17.066667-11.377778-34.133333-11.377778-5.688889 0-22.755556 5.688889-28.444445 11.377778l-329.955555 364.088889c-22.755556 22.755556-56.888889 22.755556-79.644445 5.688889-22.755556-22.755556-22.755556-56.888889-5.688888-79.644445l329.955555-364.088889c28.444444-34.133333 73.955556-51.2 119.466667-51.2s85.333333 22.755556 119.466666 56.888889l312.888889 364.088889c22.755556 22.755556 17.066667 56.888889-5.688889 79.644445-11.377778 5.688889-28.444444 11.377778-39.822222 11.377777z"
+                        p-id="3242"></path>
+                </svg>
             </div>
-            <div class="select-content-inner flex1 full-w">
-                <ul class="inner-lists flex-box full-h">
-                    <li class="inner-list flex1 full-h products-list-body">
-                        <div class="form-body">
-                            <form id='select_form'>
-                                <input type="text" placeholder="名称" name='name'>
-                                <input type="hidden" name='count' value="20">
-                                <input type="hidden" name='currentpage' value="0">
-                                <div class="flex-box">
-                                    <select name="category_id" class="flex1">
-                                        <option value="">请选择类目</option>
-                                    </select>
-                                    <select name="brand_id" class="flex1">
-                                        <option value="">请选择产品</option>
-                                    </select>
-                                    <button type='submit'>搜索</button>
-                                </div>
-                            </form>
-                        </div>
-                        <ul class="products-lists">
+            <div class="select-content">
+                <div class="select-title flex-box">
+                    <div class="btns active">产品</div>
+                    <!-- <div class="btns active">已选择</div> -->
+                </div>
+                <div class="select-content-inner flex1 full-w">
+                    <ul class="inner-lists flex-box full-h">
+                        <li class="inner-list flex1 full-h products-list-body">
+                            <div class="form-body">
+                                <form id='select_form'>
+                                    <input type="text" placeholder="名称" name='name'>
+                                    <input type="hidden" name='count' value="20">
+                                    <input type="hidden" name='currentpage' value="0">
+                                    <div class="flex-box">
+                                        <select name="category_id" class="flex1">
+                                            <option value="">请选择类目</option>
+                                        </select>
+                                        <select name="brand_id" class="flex1">
+                                            <option value="">请选择产品</option>
+                                        </select>
+                                        <button type='submit'>搜索</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <ul class="products-lists">
 
-                        </ul>
-                        <div class="ajax-loading"></div>
-                    </li>
-                    <li class="inner-list flex1 full-h">
-                        <!-- 222 -->
-                    </li>
-                </ul>
+                            </ul>
+                            <div class="ajax-loading"></div>
+                        </li>
+                        <li class="inner-list flex1 full-h">
+                            <!-- 222 -->
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
+
     <script id='module' type="text/html">
         {{each list $v i}}
         <li class="flex-box list" data-data='{{$v}}'>
@@ -90,7 +93,7 @@
         <option value="{{$v.id}}">{{$v.name}}</option>
         {{/each}}
     </script>
-
+    <div class="loading-top"></div>
     <!-- build:js scripts/jquery.js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <!-- endbuild -->
@@ -105,168 +108,212 @@
             var $selectBox = $('.right-select-box');
             var $form = $('#select_form');
             var $imageLabel;
+            var first = 0;
+            var stopScroll = true;
             $('.addpic').click(function () {
+                var $this = $(this);
+                $.ajax({
+                    url: 'http://shfs.wjkj.com/admin/api/pic/product/info',
+                    dataType: 'json',
+                    type: 'get',
+                    data: {
+                        pic_id: $this.attr('data-id')
+                    },
+                    success: function (res) {
+                        imageB($this.attr('data-src'), res.data, $this.attr('data-id'))
+                    }
+                });
+
+            });
+            //图片区域标注方法
+            function imageB(img, data, id) {
+                data.map(function(o){
+                    return o.name = o.productInfo.name
+                })
                 window.c = $imageLabel = imageLabel({
-                    img: 'http://imgshfs.test.upcdn.net/design/088/000/a92OhQJLAdckG7vxfEp1.jpg!l',
+                    img: img,
                     only: false,
                     editPop: false, //修改内容弹窗
-                    d1ata: [{
-                        "x": 0.16173752310536044,
-                        "y": 0.27149916682465397,
-                        "ex": 0.400184842883549,
-                        "ey": 0.5359200850138197,
-                        "product_id": 821,
-                        "name":1
-                    }, {
-                        "x": 0.5101663585951941,
-                        "y": 0.18468928047575808,
-                        "ex": 0.6081330868761553,
-                        "ey": 0.3213899061056287,
-                        "product_id": 819,
-                        "name":2
-                    }, {
-                        "x": 0.511090573012939,
-                        "y": 0.4770490126622696,
-                        "ex": 0.5878003696857671,
-                        "ey": 0.6217321565770961,
-                        "product_id": 817,
-                        "name":3
-                    }],
+                    data: data || [],
                     close: function (d) {
                         // console.log(d, 1212)
-                        return confirm('确定关闭吗？操作的数据有可能丢失哦！');
+                        var f = confirm('确定关闭吗？操作的数据有可能丢失哦！');
+                        if (f) {
+                            stopScroll = true;
+                            $('.right-content').hide();
+                            $('.right-select-box').removeClass('select-active');
+                        }
+                        return f
                     },
                     clickArea: function () { //点击选区事件
 
                     },
                     edit: function ($d) {
                         // console.log($d)
+                        first++;
+                        $('.right-content').show();
+                        stopScroll = false;
+                        if (first == 1) {
+                            setTimeout(function () {
+                                rightContent();
+                            }, 10)
+                        }
                         $('.right-select-box').addClass('select-active');
                     },
                     startArea: function () { //开始绘制事件
 
                     },
-                    confirm:function(d){
+                    confirm: function (d) {
                         var flag = true;
-                        $.each(d,function(i,o){
-                            if(!o.product_id){
+                        $.each(d, function (i, o) {
+                            if (!o.product_id) {
                                 flag = false;
                             }
                         })
-                        if(!flag){
+                        if (!flag) {
                             alert('选区有未绑定产品的，请检查灰色块！')
+                        } else {
+                            // http://shfs.wjkj.com/admin/api/pic/product/add
+                            $('.loading-top').addClass('active');
+                            $.ajax({
+                                url: 'http://shfs.wjkj.com/admin/api/pic/product/add',
+                                type: 'POST',
+                                dataType: 'json',
+                                async:false,
+                                data: {
+                                    pic_id: id,
+                                    areas:d
+                                },
+                                success: function (res) {
+                                    if(res.code ==1000){
+
+                                    }else{
+                                        flag = false;
+                                    }
+                                },
+                                error:function(){
+                                    flag = false;
+                                }
+                            });
+                            $('.loading-top').removeClass('active');
+
                         }
                         return flag;
                     }
                 });
 
-            });
-            $('.select-close').click(function () {
-                $selectBox.toggleClass('select-active')
-            })
-            $('.select-title .btns').click(function () {
-                var $t = $(this);
-                $t.addClass('active').siblings().removeClass('active');
-                $('.inner-lists').css({
-                    marginLeft: -100 * $t.index() + '%'
-                })
-            })
-            var $ajaxLoading = $('.ajax-loading');
-            var flag = true,
-                first = true,
-                $set;
-            var total = 0;
-            $('.products-list-body').scroll(function () {
-                var $t = $(this);
-                var s = $t.scrollTop() + $t.height();
-                var t = $('.products-lists').height();
-                // console.log(s+50,t)
-                if (s + 200 > t && flag) {
-                    flag = false;
-                    var p = Number($form.find('[name=currentpage]').val());
-                    $form.find('[name=currentpage]').val(p + 1);
-                    $.ajax({
-                        url: 'http://shfs.wjkj.com/admin/api/pic/product/list',
-                        dataType: 'json',
-                        type: 'get',
-                        data: $form.serializeArray(),
-                        success: function (res) {
-                            if (res.code == 1000) {
-                                $('.products-lists').append(template('module', res.data));
-                                if ($set) {
-                                    clearTimeout($set);
-                                }
-                                total += res.data.list.length;
 
-                                $set = setTimeout(function () {
-                                    if (res.data.params.total == 0) {
-                                        $ajaxLoading.addClass('nothing');
-                                        flag = false;
-                                    } else {
-                                        if (res.data.params.total > total) {
-                                            flag = true;
-                                        } else {
-                                            flag = false;
-                                            $ajaxLoading.addClass('over');
-                                        }
-                                    }
-                                    $('.products-list-body').scroll();
-                                }, 10)
-                                if (first) {
-                                    $('#select_form [name=category_id]').append(template(
-                                        'select_option', res.data))
-                                    $('#select_form [name=brand_id]').append(template(
-                                        'select_option1', res.data))
-                                }
-                                first = false;
-                            }
-                        },
-                        error: function () {
-                            flag = true;
-                        }
+            }
+            //右边产品列表逻辑以及数据渲染
+            function rightContent() {
+                $('.select-close').click(function () {
+                    $selectBox.toggleClass('select-active')
+                });
+                $('.select-title .btns').click(function () {
+                    var $t = $(this);
+                    $t.addClass('active').siblings().removeClass('active');
+                    $('.inner-lists').css({
+                        marginLeft: -100 * $t.index() + '%'
                     })
-                }
-            }).scroll().on('click', '.list', function () {
-                var $t = $(this);
-                var d = JSON.parse($t.attr('data-data'));
-                var $edit = $('.imageLabel-drop-edit');
-                if ($edit.length) {
-                    var j = JSON.parse($edit.attr('data-json'));
-                    j.product_id = d.id;
-                    j.name = d.name;
-                    $edit.attr('data-json', JSON.stringify(j));
-                    $edit.find('span').html(d.name);
-                    $edit.addClass('imageLabel-drop-has');
-                    $t.addClass('active');
-                }
-            });
-            $('#select_form').submit(function (e) {
-                var $t = $(this);
-                e.preventDefault();
-                $form.find('[name=currentpage]').val(0);
-                $('.products-lists').html('');
-                flag = true;
-                total = 0;
-                $ajaxLoading.removeClass('nothing over');
-                $('.products-lists').scroll();
-                return false;
-            });
-            setInterval(function () {
-                var $drop = $('.imageLabel-drop-has');
-                var $lists = $('.products-lists .list').removeClass('active');
-                if ($drop.length > 0) {
-                    $lists.each(function (i, o) {
-                        var $t = $(this);
-                        var d = JSON.parse($t.attr('data-data'));
-                        $drop.each(function (i1, o1) {
-                            var d1 = JSON.parse($(o1).attr('data-json'));
-                            if (d1.product_id == d.id) {
-                                $t.addClass('active');
+                });
+                var $ajaxLoading = $('.ajax-loading');
+                var flag = true,
+                    first = true,
+                    $set;
+                var total = 0;
+                $('.products-list-body').scroll(function () {
+                    var $t = $(this);
+                    var s = $t.scrollTop() + $t.height();
+                    var t = $('.products-lists').height();
+                    // console.log(s+50,t)
+                    if (s + 200 > t && flag && !stopScroll) {
+                        flag = false;
+                        var p = Number($form.find('[name=currentpage]').val());
+                        $form.find('[name=currentpage]').val(p + 1);
+                        $.ajax({
+                            url: 'http://shfs.wjkj.com/admin/api/pic/product/list',
+                            dataType: 'json',
+                            type: 'get',
+                            data: $form.serializeArray(),
+                            success: function (res) {
+                                if (res.code == 1000) {
+                                    $('.products-lists').append(template('module', res.data));
+                                    if ($set) {
+                                        clearTimeout($set);
+                                    }
+                                    total += res.data.list.length;
+
+                                    $set = setTimeout(function () {
+                                        if (res.data.params.total == 0) {
+                                            $ajaxLoading.addClass('nothing');
+                                            flag = false;
+                                        } else {
+                                            if (res.data.params.total > total) {
+                                                flag = true;
+                                            } else {
+                                                flag = false;
+                                                $ajaxLoading.addClass('over');
+                                            }
+                                        }
+                                        $('.products-list-body').scroll();
+                                    }, 10)
+                                    if (first) {
+                                        $('#select_form [name=category_id]').append(
+                                            template(
+                                                'select_option', res.data))
+                                        $('#select_form [name=brand_id]').append(template(
+                                            'select_option1', res.data))
+                                    }
+                                    first = false;
+                                }
+                            },
+                            error: function () {
+                                flag = true;
                             }
+                        })
+                    }
+                }).scroll().on('click', '.list', function () {
+                    var $t = $(this);
+                    var d = JSON.parse($t.attr('data-data'));
+                    var $edit = $('.imageLabel-drop-edit');
+                    if ($edit.length) {
+                        var j = JSON.parse($edit.attr('data-json'));
+                        j.product_id = d.id;
+                        j.name = d.name;
+                        $edit.attr('data-json', JSON.stringify(j));
+                        $edit.find('span').html(d.name);
+                        $edit.addClass('imageLabel-drop-has');
+                        $t.addClass('active');
+                    }
+                });
+                $('#select_form').submit(function (e) {
+                    var $t = $(this);
+                    e.preventDefault();
+                    $form.find('[name=currentpage]').val(0);
+                    $('.products-lists').html('');
+                    flag = true;
+                    total = 0;
+                    $ajaxLoading.removeClass('nothing over');
+                    $('.products-lists').scroll();
+                    return false;
+                });
+                setInterval(function () {
+                    var $drop = $('.imageLabel-drop-has');
+                    var $lists = $('.products-lists .list').removeClass('active');
+                    if ($drop.length > 0) {
+                        $lists.each(function (i, o) {
+                            var $t = $(this);
+                            var d = JSON.parse($t.attr('data-data'));
+                            $drop.each(function (i1, o1) {
+                                var d1 = JSON.parse($(o1).attr('data-json'));
+                                if (d1.product_id == d.id) {
+                                    $t.addClass('active');
+                                }
+                            });
                         });
-                    });
-                }
-            }, 1000)
+                    }
+                }, 1000);
+            }
         })
 
     </script>

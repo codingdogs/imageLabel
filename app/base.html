@@ -15,42 +15,62 @@
 </head>
 
 <body>
-    <button class="addpic">点击选择图片</button>
-   <input type="text" name='ddd'>
-  
-
+    <form action="" id='imgform'>
+        <p>图片链接</p>
+        <input type="text" name='src' value='https://i1.mifile.cn/f/i/18/mitv4A/40/build.jpg' style='display:block;width:100%;height:30px;'>
+        <button class="addpic" type="submit" disabled style='margin-top:10px;padding:10px;'>点击标注图片</button>
+    </form>
     <!-- build:js scripts/jquery.js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <!-- endbuild -->
-     <!-- build:js scripts/jquery.imageLabel.min.js -->
-     <script src="scripts/main.js"></script>
-     <!-- endbuild -->
+    <!-- build:js scripts/jquery.imageLabel.min.js -->
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
     <script>
         $(function () {
             var $selectBox = $('.right-select-box');
-            $('.addpic').click(function () {
-                var $imageLabel=window.c=imageLabel({
-                    img: 'https://i1.mifile.cn/f/i/18/mitv4A/40/build.jpg',
+            $('.addpic').removeAttr('disabled')
+            $('#imgform').submit(function (e) {
+                e.preventDefault();
+                var $imageLabel = window.c = imageLabel({
+                    img: $('[name=src]').val(),
                     editPop: true, //修改内容弹窗
+                    // data: [{
+                    //     "x": 0.22570911285455642,
+                    //     "y": 0.37189688291389805,
+                    //     "ex": 0.45141822570911283,
+                    //     "ey": 0.6551396000355341,
+                    // }, {
+                    //     "x": 0.5932407966203983,
+                    //     "y": 0.36803448222587576,
+                    //     "ex": 0.8117079058539529,
+                    //     "ey": 0.6512771993475117,
+                    //     "name": "小米电视"
+                    // }],
                     close: function (d) {
+                        if (d.length) {
+                            alert(JSON.stringify(d))
+                        }
                         return true;
                     },
                     clickArea: function () { //点击选区事件
 
                     },
-                    edit:function($d){
+                    edit: function ($d) {
                         console.log($d)
                     },
                     startArea: function () { //开始绘制事件
 
                     },
-                    confirm:function(d){
-                        console.log(d);
+                    confirm: function (d) { //确定按钮
+                        if (d.length) {
+                            alert(JSON.stringify(d))
+                        }
                         return true;
                     }
                 });
             });
-          
+
         })
 
     </script>

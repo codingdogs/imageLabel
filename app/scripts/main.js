@@ -40,7 +40,7 @@ function imageLabel(c) {
         data:[],//默认渲染的数据
     }
     config = $.extend(config, c);
-    $('imageLable-box').remove();
+    $('.imageLabel-box').remove();
     var html = `<div class="imageLabel-box">
     <div class="imageLabel">
         <div class="imageLabel-img-boxs">
@@ -115,7 +115,7 @@ function imageLabel(c) {
         })
         $.each(config.data,function(i,o){//渲染默认数据
             $d = $(
-                `<div class="imageLabel-imgdrop imageLabel-drop-has"><span class="imageLabel-imgdrop-font">${o.name}</span><div class="imageLable-i-s"></div></div>`
+                `<div class="imageLabel-imgdrop ${o.name?'imageLabel-drop-has':''}"><span class="imageLabel-imgdrop-font">${o.name||''}</span><div class="imageLable-i-s"></div></div>`
             );
             for (let index = 0; index < 8; index++) {
                 $d.find('.imageLable-i-s').append('<i class="imageLable-i">')
@@ -326,7 +326,11 @@ function imageLabel(c) {
                 if (Math.abs(e.clientX - obj.cx) > 10 &&
                     Math.abs(e.clientY - obj.cy) > 10 && !flag_target && !flag_i) {
                     if (config.editPop) {
-                        $('.imageLabel-input').addClass('imageLabel-active').find('input').focus().val('');
+                        $('.imageLabel-input').addClass('imageLabel-active').find('input').val('');
+                        setTimeout(function(){
+                            var a=$('.imageLabel-input').find('input').focus();
+                            a[0].setSelectionRange(-1,-1);
+                        },500)
                     }
                     config.edit($d)
                 } else {
@@ -353,8 +357,17 @@ function imageLabel(c) {
             $input.removeClass('imageLabel-active')
         })
         $input.find('.imageLabel-input-ok').click(function () {
-            $d.find('span').html($i.val());
+            $d.find('.imageLabel-imgdrop-font').html($i.val());
+            var j = JSON.parse($d.attr('data-json'));
+            j.name = $i.val();
+            $d.attr('data-json',JSON.stringify(j))
             $input.removeClass('imageLabel-active');
+            if($i.val()){
+                $d.addClass('imageLabel-drop-has');
+            }else{
+                $d.removeClass('imageLabel-drop-has');
+
+            }
         })
         $('.imageLabel-delete').click(function () { //删除操作
             $d.remove();
@@ -364,7 +377,11 @@ function imageLabel(c) {
             config.edit($d)
             $d.addClass('imageLabel-drop-edit').siblings().removeClass('imageLabel-drop-edit')
             if (config.editPop) {
-                $input.addClass('imageLabel-active').find('input').focus().val($d.find('span').html());
+                $input.addClass('imageLabel-active').find('input').val($d.find('.imageLabel-imgdrop-font').html());
+                setTimeout(function(){
+                    var a=$input.find('input').focus();
+                    a[0].setSelectionRange(-1,-1);
+                },500)
             }
             $menu.hide();
         })
