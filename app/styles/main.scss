@@ -182,7 +182,7 @@ $colorImageLabel:( "primary":#4B5060, // 主题颜色
         display: none;
         z-index: -1;
         position: absolute;
-        background-color: rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, 0.4);
         &:nth-of-type(1) {
             bottom: 100%;
             left: 50%;
@@ -271,35 +271,39 @@ $colorImageLabel:( "primary":#4B5060, // 主题颜色
         }
     }
 
+    em.imageLable-em{
+        pointer-events: none;
+    }
+
+    &.imageLabel-drop-has{
+        .imageLabel-imgdrop-font{
+            opacity: 1;
+        }
+        background-color: rgba(255,0,0,0.3);
+    }
+    &.imageLabel-drop-edit{
+        border:2px solid transparent;
+        border-image:url('../images/border.gif') 1 1 round;
+        &.imageLabel-drop-has{
+            background-color: rgba(0,0,255,0.3);
+        }
+    }
+    &.imageLabel-drop-move{//最重要
+        .imageLabel-imgdrop-font{
+            opacity: 0;
+        }
+        background-color: transparent!important;
+    }
+
     &.imageLabel-drop-now {
         .imageLabel-imgdrop-font{
             opacity: 0;
         }
         display: block!important;
-        background-color: transparent !important;
+        background-color: transparent;
         em.imageLable-em {
             display: block;
         } // box-shadow:rgba(0, 0, 0, 0.5) 0px 0px 0px 99999999999px;
-    }
-    em.imageLable-em{
-        pointer-events: none;
-    }
-    &.imageLabel-drop-edit{
-        border:2px solid transparent;
-        border-image:url('../images/border.gif') 1 1 round;
-        @extend .imageLabel-drop-now;
-    }
-    &.imageLabel-drop-has{
-        .imageLabel-imgdrop-font{
-            opacity: 1;
-        }
-        background-color: rgba(255,0,0,0.3)!important;
-    }
-    &.imageLabel-drop-move{
-        .imageLabel-imgdrop-font{
-            opacity: 0;
-        }
-        background-color: transparent !important;
     }
     .imageLabel-imgdrop-font{
         pointer-events: none;
@@ -377,3 +381,7 @@ $colorImageLabel:( "primary":#4B5060, // 主题颜色
         transform: rotate(360deg)
     }
 }
+
+
+
+
