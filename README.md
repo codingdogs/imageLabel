@@ -6,7 +6,10 @@
 ![pic](https://codingdogs.github.io/imageLabel/dist/images/pic.gif)
 
 ## [demo](https://codingdogs.github.io/imageLabel/dist/)
-
+## install
+```shell
+bower install --save imageLabel
+```
 ## start
 >引入jquery，以及插件的css，js
 ```html
