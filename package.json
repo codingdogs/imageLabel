@@ -1,6 +1,6 @@
 {
     "name": "imagelabel",
-    "version": "1.0.0",
+    "version": "0.10",
     "description": "image label tool",
     "main": "gulpfile.js",
     "private":false,
