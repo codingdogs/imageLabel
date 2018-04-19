@@ -61,14 +61,14 @@ $imageLabel.close()//关闭
 | close     |Function  |           | 关闭按钮事件 return false 阻止默认关闭 |
 | confirm     |Function  |           | 确定按钮事件 return false 阻止默认关闭 |
 
-## class(目前仅支持class修改样式)
+## class(目前仅支持class修改样式)
 
-> 选区class  imageLabel-drop
+> 选区class imageLabel-drop
 
-> 点击选取添加imageLabel-drop-now
+> 点击选取添加 imageLabel-drop-now
 
 > 拖动选取添加 imageLabel-drop-now&imageLabel-drop-move
 
-> 编辑选取添加 imageLabel-drop-edit
+> 编辑选取添加 imageLabel-drop-edit
 
-> 选区有编辑内容 imageLabel-drop-has
+> 选区有编辑内容 imageLabel-drop-has
